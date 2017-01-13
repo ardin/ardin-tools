@@ -4,18 +4,24 @@ Usefull public bash aliases and functions
 
 ## Available functions
 
-* ssl-sni
-* ssl-dates
+* ssl-san - check subject alternative name
+* ssl-dates - check expiry certificate dates
+* grep-ip - fetch all ip from file
+* server-info - get basic information (cpu,hdd,ram) from ssh server
+* docker-enter - enter to docker container (script not mine)
+* change-root-password - changing root password for given server
+* shadow-pass - generate shadow password (eq. for pillar needs)
 
 ## Available aliases
 
 * s - ssh
+* h - host
 * docker-clean - cleans not removed images from disk
 
 
 ## Installation
 
-### From repo (fast)
+### From repo
 
 #### CentOS 6 / 7
 Enable repository
