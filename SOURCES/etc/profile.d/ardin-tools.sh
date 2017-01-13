@@ -2,15 +2,8 @@
 ## Aliases
 ##
 
-#
-# Aliases / System
-# 
 alias s="ssh"
 alias h="host"
-
-#
-# Aliases / Docker
-# 
 alias docker-clean="docker rm -v `docker ps -a -q -f status=exited`  ; docker rmi `docker images -f "dangling=true" -q`"
 
 
@@ -58,7 +51,7 @@ function docker-enter ()
 
 function http-keepalive-test()
 {
-        echo Sprawdzam: ${1};
+        echo "Checking: ${1}";
         time printf "GET / HTTP/1.1\r\nHost: ${1}\r\nConnection: Keep-alive\r\n\r\n" | nc ${1} 80;
 }
 
