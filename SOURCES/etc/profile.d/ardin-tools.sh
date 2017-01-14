@@ -72,3 +72,8 @@ function shadow-pass()
         openssl passwd -1 -salt xyz ${1}
 }
 
+function ardin-tools()
+{
+	echo "ok";
+}
+
