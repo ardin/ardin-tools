@@ -27,4 +27,3 @@ echo "Install complete."
 %dir /etc/profile.d
 /etc/profile.d/ardin-tools.sh
 
-
