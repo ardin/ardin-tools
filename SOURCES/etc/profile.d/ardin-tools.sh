@@ -74,6 +74,6 @@ function shadow-pass()
 
 function ardin-tools()
 {
-	echo "ardin-tools: ok 1";
+	echo "ardin-tools: installed";
 }
 
