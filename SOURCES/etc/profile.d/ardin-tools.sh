@@ -77,3 +77,29 @@ function ardin-tools()
 	echo "ardin-tools: installed";
 }
 
+function server-deinstallation()
+{
+    [[ -z $1 ]] && echo " * Syntax: $FUNCNAME server" && return 1
+
+    echo "Creating directory $1"
+    mkdir $1 && cd $1 || exit 2
+
+    echo "Copying /etc .."
+    ssh $1 'cd /; tar czf - etc ' | cat - > etc.tgz
+
+    echo "Copying /home .."
+    ssh $1 'cd /; tar czf - home ' | cat - > home.tgz
+
+    echo "Copying /usr/local .."
+    ssh $1 'cd /usr; tar czf - local ' | cat - > usr-local.tgz
+
+    echo "Taking command views (crontab, ps, ip, netstat, df) .."
+    ssh $1 'crontab -l' > crontab-l
+    ssh $1 'ps auxf' > ps-auxf
+    ssh $1 'ip a s' > ip-as
+    ssh $1 'netstat -pln' > netstat-plnt
+    ssh $1 'df -h' > df-h
+
+    echo "done"
+    cd -
+}
