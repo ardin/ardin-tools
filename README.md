@@ -11,6 +11,7 @@ Usefull public bash aliases and functions
 * docker-enter - enter to docker container (script not mine)
 * change-root-password - changing root password for given server
 * shadow-pass - generate shadow password (eq. for pillar needs)
+* server-deinstallation - prepare server for deinstallation
 
 ## Available aliases
 
