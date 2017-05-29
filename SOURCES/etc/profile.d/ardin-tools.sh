@@ -23,6 +23,13 @@ function ssl-dates()
         printf "\n" | openssl s_client -connect $1 2>&1 | openssl x509 -dates -noout
 }
 
+function ssl-check-v3()
+{
+        [[ -z $1 ]] && echo " * Syntax: $FUNCNAME site:port" && return 1
+        printf "HEAD / HTTP/1.0" | openssl s_client -connect $1 -ssl3 >/dev/null 2>&1
+        [[ $? -eq 0 ]] && echo "enabled" || echo "disabled"
+}
+
 function grep-ip ()
 {
         if [ -z $1 ]; then
