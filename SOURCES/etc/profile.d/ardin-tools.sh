@@ -20,7 +20,7 @@ function ssl-san()
 function ssl-dates()
 {
         [[ -z $1 ]] && echo " * Syntax: $FUNCNAME site:port" && return 1
-        printf "\n" | openssl s_client -connect $1 2>&1 | openssl x509 -dates -noout
+        printf "\n" | openssl s_client -servername $(echo $1 | cut -f 1 -d ':') -connect $1 2>&1 | openssl x509 -dates -noout
 }
 
 function ssl-check-v3()
