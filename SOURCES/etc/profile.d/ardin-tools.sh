@@ -14,13 +14,15 @@ alias docker-clean="docker rm -v `docker ps -a -q -f status=exited`  ; docker rm
 function ssl-san()
 {
         [[ -z $1 ]] && echo " * Syntax: $FUNCNAME site:port" && return 1
-        printf "\n" | openssl s_client -connect $1 2>&1 | openssl x509 -text -noout | grep DNS
+	printf "\n" | openssl s_client -servername $(echo $1 | cut -f 1 -d ':') -connect $1 2>&1 | openssl x509 -text -noout | grep DNS | sed -e 's/^[ \t]*//'
 }
 
 function ssl-dates()
 {
         [[ -z $1 ]] && echo " * Syntax: $FUNCNAME site:port" && return 1
-        printf "\n" | openssl s_client -servername $(echo $1 | cut -f 1 -d ':') -connect $1 2>&1 | openssl x509 -dates -noout
+        sn=$(echo $1 | cut -f 1 -d ':')
+        printf "\n" | openssl s_client -servername ${sn} -connect $1 2>&1 | openssl x509 -text -noout | grep DNS | sed -e 's/^[ \t]*//'
+        printf "\n" | openssl s_client -servername ${sn} -connect $1 2>&1 | openssl x509 -dates -noout
 }
 
 function ssl-check-v3()
