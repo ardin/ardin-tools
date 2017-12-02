@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import argparse
+import socket
+from netaddr import *
+
+class bcolors:
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
+parser = argparse.ArgumentParser(description='Network domain checker')
+parser.add_argument('network', help='Checked network (with prefix)')
+args = parser.parse_args()
+
+try:
+    ip = IPNetwork(args.network)
+except Exception as e:
+    print(bcolors.FAIL + "Error: network is not valid " + bcolors.ENDC)
+    exit(1)
+
+for ip in IPNetwork(args.network).iter_hosts():
+    try:
+        hostname = socket.gethostbyaddr(str(ip))[0]
+    except:
+        hostname = "NXDOMAIN"
+
+    print('{0} - {1}'.format(str(ip), hostname ))
+

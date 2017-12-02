@@ -19,6 +19,11 @@ Usefull public bash aliases and functions
 * h - host
 * docker-clean - cleans not removed images from disk
 
+## Todo
+
+### Available scripts
+* hosts - network domain checker
+* netreport - report traffic from given network
 
 ## Installation
 

@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# program: netreport.sh
+# warning: works only with network prefix >= 24
+
+NET="${1}";
+REPORT_DIR="/root/netreport/";
+DOT_NET=$( echo $NET | sed 's/\//_/g' )
+REPORT_FILE="${REPORT_DIR}report-${DOT_NET}-$(date +%Y-%m-%d_%H:%M).txt"
+SUBNET=$( echo $NET | perl -lne 'print $1 if /(\d+\.\d+\.\d+).\d+/' )
+[[ -z "${NET}" ]] && echo "Syntax: $0 network" && exit 1;
+[[ ! -d "$REPORT_DIR" ]] && echo "Creating directory ${REPORT_DIR}" && mkdir -p "${REPORT_DIR}"
+
+export NET
+export SUBNET
+export REPORT_FILE
+
+tcpdump -nnq -i any net "${NET}" and ip and "tcp[tcpflags] & (tcp-ack) != 0" | perl -ne '
+
+$SIG{"INT"} = sub { print "Breaking!\n" };
+
+sub replace_net
+{ 
+    my $net = shift;
+    return (index($net, $ENV{SUBNET}) != -1) ? $net : "other";
+}
+
+sub save_report
+{
+    print "Saving report: $ENV{REPORT_FILE}\n";
+    my $outfile = $ENV{REPORT_FILE};
+    open (FILE, "> $outfile") || die "problem opening $outfile\n";
+    foreach my $net (sort keys %nets) 
+    {
+        print FILE "$net ($nets{$net})\n"
+    }
+    close(FILE);
+}
+
+$i=0;
+while (<>) 
+{ 
+    $| = 1; 
+    $src_net = "$1.$2.$3.$4:$5" if /(\d+)\.(\d+)\.(\d+)\.(\d+).(\d+) > (\d+)\.(\d+)\.(\d+)\.(\d+).(\d+)/;
+    $dst_net = "$6.$7.$8.$9:10" if /(\d+)\.(\d+)\.(\d+)\.(\d+).(\d+) > (\d+)\.(\d+)\.(\d+)\.(\d+).(\d+)/;
+    $src_net = replace_net( $src_net );
+    $dst_net = replace_net( $dst_net );
+
+    if (! exists( $nets{"${src_net} => ${dst_net}"}) )
+    {
+        $nets{"${src_net} => ${dst_net}"}=1;
+        print "${src_net} => ${dst_net}\n";
+    }
+    else
+    {
+        $nets{"${src_net} => ${dst_net}"}++;
+    }
+    $i++;
+    save_report() if ($i%10000==0);
+} 
+save_report();
+'
+
