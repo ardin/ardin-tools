@@ -5,6 +5,9 @@
 alias s="ssh"
 alias h="host"
 alias docker-clean="docker rm -v `docker ps -a -q -f status=exited`  ; docker rmi `docker images -f "dangling=true" -q`"
+alias pwgen-8="pwgen -s -1 8"
+alias pwgen-12="pwgen -s -1 12"
+alias pwgen-16="pwgen -s -1 16"
 
 
 ##
