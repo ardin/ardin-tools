@@ -12,6 +12,7 @@ Usefull public bash aliases and functions
 * change-root-password - changing root password for given server
 * shadow-pass - generate shadow password (eq. for pillar needs)
 * server-deinstallation - prepare server for deinstallation
+* decrypt-p12 - exctracts file.p12 into key, crt, chain and pem
 
 ## Available aliases
 

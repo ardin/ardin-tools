@@ -115,3 +115,27 @@ function server-deinstallation()
     echo "done"
     cd -
 }
+
+function decrypt-p12()
+{
+    [[ -z $1 ]] && echo " * Syntax: $FUNCNAME filename.p12" && return 1
+    [[ ! -f $1 ]] && echo "Error: no such file or directory" && return 1
+    echo -n "Enter password: "
+    read pass
+
+    # create private
+    openssl pkcs12 -passin "pass:${pass}" -in "${1}" -clcerts -nocerts -nodes | sed -ne '/-BEGIN PRIVATE KEY-/,/-END PRIVATE KEY-/p' > "${1}.key"
+
+    # certificate
+    openssl pkcs12 -passin "pass:${pass}" -in "${1}" -clcerts -nokeys | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > "${1}.crt"
+
+    # chain
+    openssl pkcs12 -passin "pass:${pass}" -in "${1}" -clcerts -nokeys -chain | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > "${1}.chain"
+
+    # pem
+    cat "${1}.key" > "${1}.pem"                                                                                                                                                       
+    cat "${1}.crt" >> "${1}.pem"
+    cat "${1}.chain" >> "${1}.pem"
+
+}
+
