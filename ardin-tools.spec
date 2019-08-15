@@ -1,6 +1,6 @@
 Name:		ardin-tools
 Version:	9
-Release:	7
+Release:	8
 Summary:	Ardin Tools
 Group:		ardin
 Source0: 	netreport
@@ -19,7 +19,7 @@ Ardin tools for GNU/Linux environments.
 %build
 %install
 install -m 0755 -d $RPM_BUILD_ROOT/etc/profile.d
-install -m 0644 etc/profile.d/ardin-tools.sh ${RPM_BUILD_ROOT}/etc/profile.d/ardin-tools.sh
+install -m 0644 ardin-tools.sh ${RPM_BUILD_ROOT}/etc/profile.d/ardin-tools.sh
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
