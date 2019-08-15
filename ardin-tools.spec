@@ -1,6 +1,6 @@
 Name:		ardin-tools
 Version:	9
-Release:	1
+Release:	2
 Summary:	Ardin Tools
 Group:		ardin
 Source0: 	netreport
