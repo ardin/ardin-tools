@@ -14,6 +14,12 @@ alias pwgen-16="pwgen -s -1 16"
 ## Functions
 ##
 
+function docker-rm-containers()
+{
+        CONTAINERS=$( docker ps -a | grep -v CONTAINER )
+        [[ ! -z $CONTAINERS ]] && docker rm -f $CONTAINERS || echo "There is no container to delete."
+}
+
 function ssl-san()
 {
         [[ -z $1 ]] && echo " * Syntax: $FUNCNAME site:port" && return 1
