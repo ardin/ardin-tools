@@ -1,11 +1,11 @@
 Name:		ardin-tools
-Version:	8
+Version:	9
 Release:	1
 Summary:	Ardin Tools
 Group:		ardin
-Source0: 	netreportX
-Source1: 	SOURCES/usr/bin/hosts
-# Source2: 	SOURCES/etc/profile.d/ardin-tools.sh
+Source0: 	netreport
+Source1: 	hosts
+Source2: 	ardin-tools.sh
 License:	GPL
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-buildroot
