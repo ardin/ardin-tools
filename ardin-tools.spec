@@ -1,5 +1,5 @@
 Name:		ardin-tools
-Version:	6
+Version:	7
 Release:	1
 Summary:	Ardin Tools
 Group:		ardin
