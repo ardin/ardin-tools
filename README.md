@@ -1,6 +1,6 @@
 # ardin-tools
 
-Usefull public bash aliases and functions
+Useful bash aliases, functions and other scripts
 
 ## Available functions
 
