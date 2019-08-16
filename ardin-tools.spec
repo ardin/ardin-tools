@@ -1,31 +1,46 @@
-Name:		ardin-tools
-Version:	9
-Release:	15
+Name:       	{{{ git_dir_name }}}
+Version:    	{{{ git_dir_version }}}
+Release:    	1%{?dist}
 Summary:	Ardin Tools
 Group:		ardin
-Source0: 	netreport
-Source1: 	hosts
-Source2: 	ardin-tools.sh
+
+URL:        	https://github.com/ardin/ardin-tools
+
+VCS:        	{{{ git_dir_vcs }}}
+Source:     	{{{ git_dir_pack }}}
+
 License:	GPL
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Ardin tools for GNU/Linux environments.
 
 %prep
-%setup -q
+{{{ git_dir_setup_macro }}}
 
 %build
 %install
 install -m 0755 -d $RPM_BUILD_ROOT/etc/profile.d
-# install -m 0644 ardin-tools.sh ${RPM_BUILD_ROOT}/etc/profile.d/ardin-tools.sh
+install -m 0644 src/etc/profile.d/ardin-tools.sh ${RPM_BUILD_ROOT}/etc/profile.d/ardin-tools.sh
+
+install -m 0755 -d $RPM_BUILD_ROOT/usr/bin
+install -m 0755 src/usr/bin/hosts ${RPM_BUILD_ROOT}/usr/bin/hosts
+install -m 0755 src/usr/bin/netreport ${RPM_BUILD_ROOT}/usr/bin/netreport
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
+
 %post
 echo "Install complete." 
+
 %files
 %dir /etc/profile.d
 /etc/profile.d/ardin-tools.sh
+/usr/bin/hosts
+/usr/bin/netreport
+
+
+%changelog
+{{{ git_dir_changelog }}}
+
 
