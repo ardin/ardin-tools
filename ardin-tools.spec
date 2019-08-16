@@ -10,10 +10,11 @@ VCS:        	{{{ git_dir_vcs }}}
 Source:     	{{{ git_dir_pack }}}
 
 License:	GPL
-BuildArch:	noarch
 
 %description
 Ardin tools for GNU/Linux environments.
+
+%global debug_package %{nil}
 
 %prep
 {{{ git_dir_setup_macro }}}
