@@ -26,5 +26,6 @@ Usefull public bash aliases and functions
 
 ## Installation
 
-Todo
+* dnf copr enable ardin/ardin-tools 
+* dnf install ardin-tools
 
