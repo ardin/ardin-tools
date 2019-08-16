@@ -26,6 +26,14 @@ Usefull public bash aliases and functions
 
 ## Installation
 
+**Fedora 30**
+
 * dnf copr enable ardin/ardin-tools 
 * dnf install ardin-tools
+
+**CentOS 7**
+
+* yum install yum-plugin-copr 
+* yum copr enable ardin/ardin-tools 
+* yum copr install ardin-tools
 
