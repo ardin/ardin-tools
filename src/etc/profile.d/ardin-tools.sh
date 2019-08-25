@@ -4,7 +4,6 @@
 
 alias s="ssh"
 alias h="host"
-alias docker-clean="docker rm -v `docker ps -a -q -f status=exited`  ; docker rmi `docker images -f "dangling=true" -q`"
 alias pwgen-8="pwgen -s -1 8"
 alias pwgen-12="pwgen -s -1 12"
 alias pwgen-16="pwgen -s -1 16"
@@ -53,12 +52,18 @@ function server-info()
     fi
 }
 
-function docker-enter ()
+function docker-enter()
 {
     CONTAINERS=`sudo docker ps -a | grep Up | awk '{ print $1" "$NF }' | xargs`;
     echo $CONTAINERS;
     ID=`dialog --title " VM Configuration " --stdout --menu "Select container" 22 70 16 $CONTAINERS`;
     sudo docker exec -t -i $ID /bin/bash
+}
+
+function docker-clean()
+{
+	docker rm -v `docker ps -a -q -f status=exited` 2>/dev/null
+	docker rmi `docker images -f "dangling=true" -q` 2>/dev/null
 }
 
 function http-keepalive-test()
