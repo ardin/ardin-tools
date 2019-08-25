@@ -2,6 +2,8 @@
 
 Useful bash aliases, functions and other scripts
 
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/ardin/ardin-tools/package/ardin-tools/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/ardin/ardin-tools/package/ardin-tools/)
+
 ## Available functions
 
 * ssl-san - check subject alternative name
@@ -28,8 +30,8 @@ Useful bash aliases, functions and other scripts
 
 **Fedora 30**
 
-* dnf copr enable ardin/ardin-tools 
-* dnf install ardin-tools
+* dnf copr enable ardin/ardin-tools -y
+* dnf install ardin-tools -y
 
 **CentOS 7**
 
