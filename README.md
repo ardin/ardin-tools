@@ -35,7 +35,7 @@ Useful bash aliases, functions and other scripts
 
 **CentOS 7**
 
-* yum install yum-plugin-copr 
-* yum copr enable ardin/ardin-tools 
-* yum copr install ardin-tools
+* yum install yum-plugin-copr -y
+* yum copr enable ardin/ardin-tools -y
+* yum install ardin-tools -y
 
