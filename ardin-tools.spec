@@ -11,6 +11,10 @@ Source:     	{{{ git_dir_pack }}}
 
 License:	GPL
 
+%if 0%{?fedora} >= 31
+Requires:       python3-netaddr
+%endif
+
 %description
 Ardin tools for GNU/Linux environments.
 
