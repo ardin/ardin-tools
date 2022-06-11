@@ -33,7 +33,7 @@ Useful bash aliases, functions and other scripts
 * dnf copr enable ardin/ardin-tools -y
 * dnf install ardin-tools -y
 
-**CentOS 7**
+**CentOS 7 / CentOS 8 / Rocky 8**
 
 * yum install yum-plugin-copr -y
 * yum copr enable ardin/ardin-tools -y
