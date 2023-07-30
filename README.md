@@ -28,7 +28,7 @@ Useful bash aliases, functions and other scripts
 
 ## Installation
 
-**Fedora 30**
+**Fedora >30**
 
 * dnf copr enable ardin/ardin-tools -y
 * dnf install ardin-tools -y
